@@ -1,0 +1,59 @@
+<div class="banner mb-3" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1556463208-f8c2505e8299?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1055&q=80);">
+  <div class="container">
+    <h1>Cocktails for creative people</strong></h1>
+  </div>
+</div>
+
+<div class="container justify-content-center">
+  <div class="cards">
+    <% @cocktails.each do |cocktail| %>
+    <div class="card" style="width: 18rem;">
+      <%= link_to cocktail, class: 'btn-white' do %>
+      <img class="card-img-top" src="https://source.unsplash.com/1600x900/?cocktail,<%= cocktail.name %> cocktail" alt="Card image cap">
+      <% end %>
+      <div class="card-body">
+        <h5 class="card-title"><%= cocktail.name %></h5>
+        <div class="float-left">
+          <%= link_to cocktail, class: 'btn-white' do %>
+          <i class="fas fa-list"></i> See Ingredients
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <!-- Button trigger modal -->
+  <%= link_to new_cocktail_path,  {'data-toggle' =>  "modal", 'data-target' => '#exampleModalCenter', class: 'btn btn-rounded my-3 mr-2', id: 'sticky-button'} do %>
+  <i id="icon" class="fas fa-plus mr-1"></i>
+  <p>Add a new cocktail</p>
+  <% end %>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Add a new cocktail</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for @cocktail do |f| %>
+          <%= f.input :name %>
+          <%= f.button :submit, class: 'btn btn-ghost' %>
+          <%= link_to "Cancel", cocktails_path, class: "btn btn-ghost" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
