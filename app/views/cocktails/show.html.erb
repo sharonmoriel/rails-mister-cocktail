@@ -1,7 +1,7 @@
 
 <div class="container text-center">
   <h1><%= @cocktail.name %></h1>
-  <%= cl_image_tag @cocktail.photo, height: 300, width: 400, crop: :fill %>
+  <%= cl_image_tag @cocktail.photo, {:x=>355, :y=>410, :width=>400, :height=>200, :crop=>"scale", :angle=>20} %>
 
   <table class="table table-hover">
     <tbody>
@@ -22,9 +22,6 @@
   <% end %>
 </div>
 
-
-
-
 <!-- Modal -->
 <div class="modal fade" id="ingredientModalCenter" tabindex="-1" role="dialog" aria-labelledby="ingredientModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -36,13 +33,16 @@
         </button>
       </div>
       <div class="modal-body">
-        <%= simple_form_for [@cocktail, @dose] do |f| %>
+        <%= simple_form_for [@cocktail, @dose], validate: true do |f| %>
         <%= f.input :description %>
         <%= f.association :ingredient, prompt: "Choose an ingredient" %>
-        <%= f.button :submit, class: 'btn btn-ghost'%>
-        <%= link_to "Cancel", cocktails_path(@cocktail), class: "btn btn-ghost" %>
-        <% end %>
+        <%= f.button :submit,"Add ingredient", class: 'btn btn-ghost'%>
+        <%= f.button :button, 'Cancel', :type => 'reset', class: "btn btn-ghost", data: { toggle: "modal", target: "#ingredientModalCenter" } =%>
+       <% end %>
       </div>
     </div>
   </div>
 </div>
+
+
+
